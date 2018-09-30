@@ -79,6 +79,18 @@
 	print_r($x);
 	echo nl2br("\nNumber of cases in section $x: ");
 	print_r($section_count[array_search(max($section_count),$section_count)]);
+	
+	echo nl2br("\nMinimum number of Cases under Sections: \n");
+	$x = array_keys($section_count,min($section_count));
+	echo "<ul>";
+    foreach($x as $Key){
+            echo "<li>";
+            echo $Key;
+            echo "</li>";
+    }
+    echo "</ul>";
+    echo "<p>";
+
 	// print_r($pending_count)
 	// $query = new MongoDB\Driver\Query($filter,$options); 
 	// $rows = $mng->executeQuery('cases.pc', $query);
