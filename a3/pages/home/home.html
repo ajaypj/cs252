@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Welcome to locate yourself
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="onLocateUser()"> Locate Me!!</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button block (click)="openMap(location)"> Open Map!!</button>
+      </ion-col>
+    </ion-row>
+      <ion-row>
+        <ion-col>
+          <p>Your Location:{{ location.lat }}/{{ location.lng }}</p>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
