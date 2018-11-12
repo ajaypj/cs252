@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for donor in donors %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + donor.image_file) }}">
+          <div class="media-body">
+            <div class="article-metadata">
+				<a class="mr-2" href="{{ url_for('user',user_id=donor.id) }}">{{ donor.username }}</a>
+            </div>
+            <h7 class="article-content" style="color:grey;"> <strong>Total Contribution : </strong>{{donor.total_contribution}}</h7>
+            <p class="article-content">Total No. of Donations : {{ donor.no_of_succesful_transactions  }} </p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

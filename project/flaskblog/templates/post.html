@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+    <div class="media-body">
+      <div class="article-metadata">
+		  <a class="mr-2" href="{{ url_for('user',user_id=post.author.id) }}">{{ post.author.username }}</a>
+        <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+        {% if post.author == current_user %}
+		 {% if post.status=="running" %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+          </div>
+        {% endif %}
+        {% endif %}
+      </div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>
+	 {% if post.status=="running" %}
+  <center>
+  <form name="PayForm" action ="/pay" method = "POST">
+	  <input type="hidden" name="post_id" value="{{ post.id}}">
+	  <input type="range" name="amount"  step="500" id="amount" value="{{ post.amount_requested }}" min="500" max="{{ post.amount_requested }}" oninput="amountRId.value = {{ post.amount_requested }} - amount.value; ao.value = amount.value">
+	  <output name="ao" id="ao"> {{ post.amount_requested }} </output>
+	  <br>
+	  Amount Remaining : 
+	   <output name="amountRName" class="requested" id="amountRId">0</output>
+		<br>
+	 <input type="submit" value="Pay">
+    <input type="reset" value="Reset">
+  </form>
+  </center>
+		  {% else %}
+		  <h2> Time for contributing to this request has expired. Sorry You cannot contribute to this cause any more. </h2>
+		  {% endif %}
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

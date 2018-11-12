@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+		<div>
+			<h2 class="account-heading"> Your Transactions : </h2>
+			<table class="table">
+			<tr>
+				<td>  Post  </td>
+				<td>  Transaction ID  </td>
+				<td>  Amount  </td>
+				<td>  Date of Transaction  </td>
+				<td>  Details  </td>
+			</tr>
+			{% for tx in current_user.transactions %}
+			<tr>
+				<td> <a class="mr-2" href="{{ url_for('post',post_id=tx.post_id) }}">{{ tx.post_id }}</a> </td>
+				<td> {{ tx.transaction_id }} </td>
+				<td> {{ tx.Amount }} </td>
+				<td> {{ tx.date_of_Transaction.strftime('%Y-%m-%d') }} </td>
+				<td> {{ tx.transaction_type }} </td>
+			</tr>
+			{% endfor %}
+			</table>
+		</div>
+		</div>
+{% endblock content %}
+

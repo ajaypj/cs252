@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<p> 
+<h2> You are donating {{ amount }} Rs . </h2>
+<h2> Are you sure you want to proceed? </h2>
+</p> 
+
+<form action="/payment" method="POST">
+	<input type = "hidden" name = "post_id" value = "{{ post_id }}">
+	<input type = "hidden" name = "amount" value = "{{ amount }}">
+			  <script
+												 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+				data-key="pk_test_itVsFp4jG72f9YqhFdG4XlqM"
+				  data-amount="{{ amount*100 }}";
+					   data-name="DoNation"
+						data-currency="inr"
+					 data-description="Widget"
+				   data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+					data-locale="auto">
+					  </script>
+		</form>
+{% endblock %}

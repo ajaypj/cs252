@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+<p> 
+<h2> Please pay 500 rs using our payment gateway to post on our website. </h2>
+</p> 
+<form action="/paid_fee" method="POST">
+	<input type = "hidden" name = "title" value = "{{ form.title }}">
+	</input>
+	<input type = "hidden" name = "content" value = "{{ form.content }}">
+	</input>
+	<input type = "hidden" name = "amount_requested" value = "{{ form.amount_requested }}">
+	</input>
+	<input type = "hidden" name = "days" value = "{{ form.days }}">
+	</input>
+	<input type = "hidden" name = "hours" value = "{{ form.hours }}">
+	</input>
+	<input type = "hidden" name = "minutes" value = "{{ form.minutes }}">
+	</input>
+			  <script
+												 src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+				data-key="pk_test_itVsFp4jG72f9YqhFdG4XlqM"
+				  data-amount="{{ 50000 }}";
+					   data-name="DoNation"
+						data-currency="inr"
+					 data-description="Widget"
+				   data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+					data-locale="auto">
+					  </script>
+</form>
+{% endblock %}
